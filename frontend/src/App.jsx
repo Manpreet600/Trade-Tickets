@@ -9,17 +9,19 @@ import Profile from "./profile";
 import Settings from "./settings";
 import InputDesign from "./trade/InputDesign";
 import InputDesign2 from "./myTickets/InputDesign";
+import InputDesignHome from "./home/InputDesign";
+import Profile2 from "./profile/InputDesign";
 
 
 function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/home" element={<Layout><Home /></Layout>} />
+      <Route path="/home" element={<Layout><InputDesignHome /></Layout>} />
       <Route path="/myTickets" element={<Layout><InputDesign2 /></Layout>} />
       <Route path="/trade" element={<Layout><InputDesign /></Layout>} />
       <Route path="/chat" element={<Layout><Chat /></Layout>} />
-      <Route path="/profile" element={<Layout><Profile /></Layout>} />
+      <Route path="/profile" element={<Layout><Profile2 /></Layout>} />
       <Route path="/settings" element={<Layout><Settings /></Layout>} />
       </Routes>
     </Router>
