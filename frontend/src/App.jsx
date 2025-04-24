@@ -11,6 +11,7 @@ import InputDesign from "./trade/InputDesign";
 import InputDesign2 from "./myTickets/InputDesign";
 import InputDesignHome from "./home/InputDesign";
 import Profile2 from "./profile/InputDesign";
+import SettingsPage from "./settings/InputDesign";
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
       <Route path="/trade" element={<Layout><InputDesign /></Layout>} />
       <Route path="/chat" element={<Layout><Chat /></Layout>} />
       <Route path="/profile" element={<Layout><Profile2 /></Layout>} />
-      <Route path="/settings" element={<Layout><Settings /></Layout>} />
+      <Route path="/settings" element={<Layout><SettingsPage /></Layout>} />
       </Routes>
     </Router>
   );
