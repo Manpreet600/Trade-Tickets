@@ -42,3 +42,6 @@ eventsRouter.get("/getEvents", async (req, res) => {
     }
 }
 );
+export {
+    eventsRouter
+}

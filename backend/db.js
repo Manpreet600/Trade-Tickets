@@ -3,9 +3,15 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     name: String,
+    lastname: String,
     userName: String,
     email: String,
-    password: String
+    city: String,
+    password: String,
+    image:{type:String,default:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-978409_1280.png"},
+    sold: { type: Int8Array, default: 0 },
+    bought: { type: Int8Array, default: 0 },
+    createdAt: { type: Date, default: Date.now() },
 }, { timestamps: true });
 
 

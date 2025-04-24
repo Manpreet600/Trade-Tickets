@@ -9,7 +9,7 @@ const authRouter = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 authRouter.post("/signup", async (req, res) => {
-  const { name, userName, email, password } = req.body;
+  const { name,lastname , userName, email, password } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -19,6 +19,7 @@ authRouter.post("/signup", async (req, res) => {
 
     await userModel.create({
         name,
+        lastname,
         userName,
         email,
         password: hashedPassword,
