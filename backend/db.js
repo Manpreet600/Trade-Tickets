@@ -10,12 +10,17 @@ const userSchema = new Schema({
 
 
 const ticketsSchema = new Schema({
+    ticketId: { type: String, unique: true },
     userName: String,
     email: String,
     type: String,
     description: String,
-    date : {type: Date},
+    date: { type: Date },
     image: String,
+    status: { type: String, default: "pending" },
+    purchaserUsername: String
+}, {
+    timestamps: true
 })
 
 const eventSchema = new Schema({
