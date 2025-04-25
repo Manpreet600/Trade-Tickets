@@ -39,6 +39,35 @@ settingsRouter.get("/mydetails", async (req, res) => {
     }
 }
 );
+
+settingsRouter.get('/paymentmethods', async (req, res) => {
+    const token = req.headers.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const userName = decoded.userName;
+    if (!userName) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+    try {
+        const data = await userModel.findOne({ userName });
+        if (!data) {
+            return res.status(400).json({ message: "User not found" });
+        }
+        res.json({
+            message: "Payment methods fetched successfully",
+            cardNumber: data.cardNumber,
+            expiryDate: data.expiryDate,
+            cvv: data.cvv,
+            paypal: data.paypal,
+            bankNumber: data.bankNumber,
+            ifsc: data.ifsc,
+        })
+    } catch (error) {
+        console.error("Error during payment methods fetch:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+);
+
 export{
     settingsRouter
 }

@@ -9,14 +9,22 @@ const userSchema = new Schema({
     city: String,
     password: String,
     image:{type:String,default:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-978409_1280.png"},
-    sold: { type: Int8Array, default: 0 },
-    bought: { type: Int8Array, default: 0 },
+    sold: { type: Number, default: 0 },
+    bought: { type: Number, default: 0 },
+    sales: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now() },
+    cardNumber: {tyepe:String,default:""},
+    expiryDate: {type:String,default:""},
+    cvv: {type:String,default:""},
+    paypal: {type:String,default:""},
+    bankNumber: {type:String,default:""},
+    ifsc: {type:String,default:""},
 }, { timestamps: true });
 
 
 const ticketsSchema = new Schema({
     ticketId: { type: String, unique: true },
+    cost : Number,
     userName: String,
     email: String,
     type: String,

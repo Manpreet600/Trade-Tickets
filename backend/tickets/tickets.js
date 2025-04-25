@@ -47,12 +47,15 @@ ticketRouter.post("/sellTickets", async (req, res) => {
     });
 
     const ticketData = await ticketsModel.findOne({ ticketId });
+    const cost = ticketData.cost;
     const sellerUsername = ticketData.userName;
     const sellerData = await userModel.findOne({ userName: sellerUsername });
+    const sales = sellerData.sales + cost;
     await userModel.updateOne({userName:sellerUsername},
         {
             $set: {
                 sold: sellerData.sold + 1,
+                sales: sales
             }
         }
     )
