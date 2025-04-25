@@ -13,7 +13,7 @@ const userSchema = new Schema({
     bought: { type: Number, default: 0 },
     sales: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now() },
-    cardNumber: {tyepe:String,default:""},
+    cardNumber: {type:String,default:""},
     expiryDate: {type:String,default:""},
     cvv: {type:String,default:""},
     paypal: {type:String,default:""},

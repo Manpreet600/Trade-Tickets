@@ -1,5 +1,4 @@
 import { Router } from "express";
-import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -11,7 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 authRouter.post("/signup", async (req, res) => {
   const { name,lastname , userName, email, password } = req.body;
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await userModel.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
