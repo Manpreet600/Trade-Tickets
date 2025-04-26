@@ -37,7 +37,7 @@ function TicketGrid() {
       {tickets.map((i) => (
         <TicketCard
           key={i}
-          id={i}
+          id={i.ticketId}
           title={`${i.title}`}
           date={`${i.date.split('T')[0]}`}
           location={`${i.location}`}

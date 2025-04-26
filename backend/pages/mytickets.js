@@ -28,6 +28,25 @@ myTicketsRouter.get("/", async (req, res) => {
     }
 }
 );
+myTicketsRouter.post("/deleteTicket", async (req, res) => {
+    console.log("delete ticket");
+    const { token, ticketId } = req.body;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const userName = decoded.userName;
+    if (!userName || !ticketId) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+    try {
+        await ticketsModel.deleteOne({ ticketId });
+        res.json({
+            message: "Ticket deleted successfully",
+        });
+    } catch (error) {
+        console.error("Error during ticket deletion:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+);
 export {
     myTicketsRouter
 }
