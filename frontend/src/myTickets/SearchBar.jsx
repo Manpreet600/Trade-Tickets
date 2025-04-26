@@ -44,6 +44,7 @@ function SearchBar() {
     typeRef.current.value = "Sports";
     descriptionRef.current.value = "";
     imageRef.current.value = "";
+    window.location.reload();
   };
 
   return (

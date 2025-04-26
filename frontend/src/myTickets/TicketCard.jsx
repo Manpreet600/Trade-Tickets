@@ -27,17 +27,17 @@ function TicketCard({ id, title, date, location, price, imageUrl }) {
       <div className="flex gap-3 justify-between items-center mt-4">
         <div className="text-xl font-semibold text-blue-400">{price}</div>
         <div className="flex gap-2">
-          <button
+          {/* <button
             className="px-3 py-1.5 text-xs font-semibold text-white rounded-md border border-solid cursor-pointer bg-zinc-800 border-neutral-700 duration-[0.2s] transition-[background-color] hover:bg-zinc-700"
             onClick={handleEdit}
           >
-            Edit
-          </button>
+            Edit */}
+          {/* </button> */}
           <button
-            className="px-3 py-1.5 text-xs font-semibold text-white bg-blue-400 rounded-md cursor-pointer border-none duration-[0.2s] transition-[background-color] hover:bg-blue-500"
+            className="px-3 py-1.5 text-xs font-semibold text-white bg-red-400 rounded-md cursor-pointer border-none duration-[0.2s] transition-[background-color] hover:bg-red-500"
             onClick={handleViewDetails}
           >
-            View Details
+            Remove
           </button>
         </div>
       </div>

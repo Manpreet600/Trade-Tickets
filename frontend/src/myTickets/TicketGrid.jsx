@@ -8,7 +8,7 @@ function TicketGrid() {
   const [tickets, setTickets] = useState([]);
   useEffect(() => {
     async function main(){
-      const res = await fetch("http://localhost:3000/api/tradeTickets/allTickets", {
+      const res = await fetch("http://localhost:3000/api/myTickets", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -16,9 +16,9 @@ function TicketGrid() {
         },
       });
       const data = await res.json();
-      if (data.message === "Dashboard data fetched successfully") {
-        console.log(data);
-        setTickets(data.tickets);
+      if (data.message === "Tickets fetched successfully") {
+        setTickets(data.data);
+        console.log(data.data);
       } else {
         console.error("Error fetching dashboard data");
       }
@@ -27,16 +27,21 @@ function TicketGrid() {
 
   },[])
 
+  useEffect(() => {
+    console.log(tickets);
+  }
+  , [tickets]);
+
   return (
     <section className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] max-sm:grid-cols-[1fr]">
       {tickets.map((i) => (
         <TicketCard
           key={i}
           id={i}
-          title={`Event Title ${i}`}
-          date={`March ${i + 14}, 2024`}
-          location="Venue Name"
-          price="$99.99"
+          title={`${i.title}`}
+          date={`${i.date.split('T')[0]}`}
+          location={`${i.location}`}
+          price={`₹${i.cost}`}
           imageUrl="https://images.pexels.com/photos/18515130/pexels-photo-18515130.jpeg"
         />
       ))}

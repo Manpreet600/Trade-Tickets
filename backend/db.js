@@ -24,6 +24,8 @@ const userSchema = new Schema({
 
 const ticketsSchema = new Schema({
     ticketId: { type: String, unique: true },
+    title : String,
+    location : String,
     cost : Number,
     userName: String,
     email: String,

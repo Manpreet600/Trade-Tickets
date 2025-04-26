@@ -18,7 +18,9 @@ tradeRouter.get("/allTickets", async (req, res) => {
         if (!tickets) {
             return res.status(400).json({ message: "No tickets found" });
         }
+        console.log(tickets);
         const otherTickets = tickets.filter(ticket => ticket.userName !== userName);
+        console.log(otherTickets);
         res.json({
             message: "Tickets fetched successfully",
             data: otherTickets
