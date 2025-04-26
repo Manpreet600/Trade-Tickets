@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Home, Ticket, Repeat, MessageSquare, User, Settings, LogOut } from 'lucide-react';
 
 function Sidebar() {
@@ -10,6 +10,14 @@ function Sidebar() {
         { href: '/profile', label: 'Profile', icon: <User size={18} /> },
         { href: '/settings', label: 'Settings', icon: <Settings size={18} /> },
     ];
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/auth';
+        }
+    }
+    , []);
 
     return (
         <div className="w-64 h-screen bg-[#10141f] text-white flex flex-col shadow-lg">
@@ -30,7 +38,10 @@ function Sidebar() {
             </nav>
             <div className="p-4 border-t border-gray-700">
                 <a
-                    href="/logout"
+                    onClick={() => {
+                        localStorage.removeItem('token');
+                        window.location.href = '/auth';
+                    }}
                     className="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-md text-white font-medium transition"
                 >
                     <LogOut size={18} />

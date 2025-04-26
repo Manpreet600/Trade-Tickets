@@ -1,17 +1,42 @@
 "use client";
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StatCard from "./StatCard";
 import EventCard from "./EventCard";
 import ListingItem from "./ListingItem";
 
 function TicketDashboard() {
-  const [stats, setStats] = useState(() => ({
-    activeListings: 24,
-    totalSales: 2156,
-    totalViews: 1205,
-    avgTicketPrice: 85,
-  }));
+  const [activeListings, setActiveListings] = useState(0);
+  const [totalSales, setTotalSales] = useState(0);
+  const [views, setViews] = useState(0);
+  const [avgPrice, setAvgPrice] = useState(0);
+  const [totalSalesValue, setTotalSalesValue] = useState(0);
+
+  useEffect(() => {
+    async function main() {
+      console.log(localStorage.getItem("token"))
+      const res = await fetch("http://localhost:3000/api/dashboard/stats",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "token": localStorage.getItem("token"),
+          },
+        }
+      )
+      const data = await res.json();
+      if (data.message === "Dashboard data fetched successfully") {
+        setActiveListings(data.data.totalTickets);
+        setTotalSales(data.data.soldTickets);
+        setViews(data.data.views);
+        setAvgPrice(data.data.sales);
+        setTotalSalesValue(data.data.totalSalesValue);
+      } else {
+        console.error("Error fetching dashboard data");
+      }
+    }
+    main()
+  }, []);
 
   return (
     <main className="min-h-screen text-white bg-neutral-900">
@@ -27,31 +52,31 @@ function TicketDashboard() {
             <div className="flex gap-4">
               <div className="grid gap-6 mt-8 grid-cols-[repeat(4,1fr)]">
                 <StatCard
-                  value={stats.activeListings}
+                  value={activeListings}
                   label="Active Listings"
                   colorTheme="blue"
                 />
                 <StatCard
-                  value={stats.totalSales}
+                  value={totalSales}
                   label="Total Sales"
                   colorTheme="green"
-                  prefix="$"
+                  prefix="₹"
                 />
                 <StatCard
-                  value={stats.totalViews}
+                  value={views}
                   label="Total Views"
                   colorTheme="violet"
                 />
                 <StatCard
-                  value={stats.avgTicketPrice}
+                  value={avgPrice}
                   label="Avg Ticket Price"
                   colorTheme="sky"
-                  prefix="$"
+                  prefix="₹"
                 />
               </div>
               <div className="p-4 rounded-md border border-solid bg-[rgba(46,160,67,0.1)] border-green-600 border-opacity-10">
                 <div className="text-2xl font-semibold text-green-600">
-                  $2,156
+                  {totalSalesValue}
                 </div>
                 <div className="text-sm text-zinc-400">Total Sales</div>
               </div>

@@ -7,8 +7,7 @@ const dashRouter = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 dashRouter.get("/stats", async (req, res) => {
-    const {token} = req.headers.token;
-    console.log(token);
+    const token = req.headers.token;
     const decoded = jwt.verify(token, JWT_SECRET);
     const userName = decoded.userName;
     if (!userName) {

@@ -22,7 +22,7 @@ app.use('/api/events', eventsRouter);
 app.use('/api/dashboard', dashRouter);
 app.use('/api/tradeTickets', tradeRouter);
 app.use('/api/myTickets', myTicketsRouter);
-app.use('api/settings', settingsRouter)
+app.use('api/settings', settingsRouter);
 
 const main = async () => {
     await mongoose.connect(MONGO_URI)
@@ -30,7 +30,7 @@ const main = async () => {
 }
 main().then(() => {
     console.log(`Server is running on port ${PORT}`);
-    console.log(`Connected to MongoDB `);
+    console.log(`Connected to MongoDB`);
 
 }
 ).catch((err) => {

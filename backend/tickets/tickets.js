@@ -7,16 +7,17 @@ const ticketRouter = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 ticketRouter.post("/createTicket", async (req, res) => {
-    const { token, type, description, date, image } = req.body;
+    const { token, type, description, date, image, location } = req.body;
     const decoded = jwt.verify(token, JWT_SECRET);
     const userName = decoded.userName;
     const data = await userModel.findOne({ userName })
     const email = data.email;
     if (!userName || !type || !description || !date || !image) {
+        console.log(userName, type, description, date, image);
         return res.status(400).json({ message: "All fields are required" });
     }
     try {
-        await ticketsSchema.create({
+        await ticketsModel.create({
             userName,
             email,
             type,
@@ -24,6 +25,7 @@ ticketRouter.post("/createTicket", async (req, res) => {
             date,
             image,
             status: "pending",
+            location:location
         });
         res.json({
             message: "Ticket created successfully",
@@ -81,6 +83,8 @@ ticketRouter.post("/sellTickets", async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
+
 
 export {
     ticketRouter

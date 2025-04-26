@@ -14,7 +14,7 @@ const EventCard = ({ title, location, date, price, ticketsLeft, imageUrl }) => {
           {location} • {date}
         </p>
         <div className="flex justify-between items-center">
-          <span className="font-semibold text-blue-400">From ${price}</span>
+          <span className="font-semibold text-blue-400">From ₹{price}</span>
           <span className="px-2 py-1 text-xs text-blue-400 rounded-xl bg-[rgba(56,139,253,0.2) border border-blue-500 border-opacity-20">
             {ticketsLeft} tickets left
           </span>
