@@ -12,7 +12,7 @@ function ChatInput({ currentMessage, setCurrentMessage, sendMessage }) {
     <footer className="p-4 border-t border-solid border-t-white border-t-opacity-10">
       <div className="flex gap-3">
         <input
-          className="flex-1 px-4 py-3 rounded-lg border border-solid bg-white bg-opacity-10 border-white border-opacity-10 text-[white]"
+          className="flex-1 px-4 py-3 rounded-lg border border-solid bg-white bg-opacity-10 border-white border-opacity-10 text-black"
           type="text"
           placeholder="Type a message..."
           value={currentMessage}

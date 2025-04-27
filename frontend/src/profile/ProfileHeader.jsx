@@ -28,7 +28,7 @@ function ProfileHeader({ user, toggleEdit }) {
       </div>
       <button
         className="px-6 py-3 ml-auto font-medium bg-red-400 rounded-lg transition-opacity cursor-pointer duration-[0.2s]"
-        onClick={toggleEdit}
+        onClick={()=>{window.location.href="/settings"}}
         aria-label="Edit Profile"
       >
         Edit Profile

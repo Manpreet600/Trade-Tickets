@@ -5,10 +5,14 @@ function PaymentSettings() {
     <section className="p-6 bg-gray-800 rounded-xl">
       <h2 className="mb-6 text-2xl font-medium">Payment & Payout Settings</h2>
       <div className="flex flex-col gap-4">
-        <button className="p-3 text-red-400 bg-transparent rounded-lg border border-red-400 border-solid cursor-pointer">
+        <button
+          onClick={() => { window.location.href = "/settings" }}
+          className="p-3 text-red-400 bg-transparent rounded-lg border border-red-400 border-solid cursor-pointer">
           Add Payment Method
         </button>
-        <button className="p-3 text-red-400 bg-transparent rounded-lg border border-red-400 border-solid cursor-pointer">
+        <button
+          onClick={() => { window.location.href = "/settings" }}
+          className="p-3 text-red-400 bg-transparent rounded-lg border border-red-400 border-solid cursor-pointer">
           Setup Payout Account
         </button>
       </div>
