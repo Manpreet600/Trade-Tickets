@@ -12,8 +12,8 @@ const ListingItem = ({ title, section, price, tickets }) => {
           <div className="font-semibold text-blue-400">₹{price}</div>
           <div className="text-xs text-zinc-400">{tickets} tickets</div>
         </div>
-        <button className="px-3 py-1.5 text-xs text-white rounded-md border border-solid cursor-pointer bg-zinc-800 border-blue-50 border-opacity-10">
-          Edit
+        <button className="px-3 py-1.5 text-xs text-white rounded-md  cursor-pointer bg-red-600/70 text-[14px]">
+          remove
         </button>
       </div>
     </article>

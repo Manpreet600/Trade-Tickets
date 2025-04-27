@@ -23,13 +23,14 @@ dashRouter.get("/stats", async (req, res) => {
         const soldTickets = tickets.filter(ticket => ticket.status === "sold").length;
         const pendingTickets = tickets.filter(ticket => ticket.status === "pending").length;
         const views = 8;
-        const sales = 0;
+        const sales = data.sales;
         res.json({
             message: "Dashboard data fetched successfully",
             data: {
                 userName: data.userName,
                 totalTickets,
-                soldTickets,
+                avgPrice: data.avgPrice,
+                sold:data.sold,
                 pendingTickets,
                 views,
                 sales

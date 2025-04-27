@@ -25,7 +25,7 @@ ticketRouter.post("/createTicket", async (req, res) => {
     const data = await userModel.findOne({ userName })
     const email = data.email;
     const randomString = rabndomString(10);
-    if (!userName || !type || !description || !date || !image) {
+    if (!userName || !type || !description || !date ) {
         console.log(userName, type, description, date, image);
         return res.status(400).json({ message: "All fields are required" });
     }

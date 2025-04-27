@@ -11,31 +11,66 @@ function TicketDashboard() {
   const [views, setViews] = useState(0);
   const [avgPrice, setAvgPrice] = useState(0);
   const [totalSalesValue, setTotalSalesValue] = useState(0);
+  const [latestTickets, setLatestTickets] = useState([]);
+  const [listings, setListings] = useState([]); // New state for active listings
 
   useEffect(() => {
-    async function main() {
-      console.log(localStorage.getItem("token"))
-      const res = await fetch("http://localhost:3000/api/dashboard/stats",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token"),
-          },
-        }
-      )
+    async function fetchDashboardStats() {
+      const res = await fetch("http://localhost:3000/api/dashboard/stats", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("token"),
+        },
+      });
       const data = await res.json();
       if (data.message === "Dashboard data fetched successfully") {
         setActiveListings(data.data.totalTickets);
-        setTotalSales(data.data.soldTickets);
+        setTotalSales(data.data.sold);
+        console.log(data.data.sales)
         setViews(data.data.views);
-        setAvgPrice(data.data.sales);
-        setTotalSalesValue(data.data.totalSalesValue);
+        setAvgPrice(data.data.avgPrice);
+        setTotalSalesValue(data.data.sales);
       } else {
         console.error("Error fetching dashboard data");
       }
     }
-    main()
+
+    async function fetchLatestTickets() {
+      const res = await fetch("http://localhost:3000/api/tradeTickets/allTickets", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("token"),
+        },
+      });
+      const data = await res.json();
+      if (data.message != "Latest tickets fetched successfully") {
+        setLatestTickets(data.data.slice(0, 3));
+      } else {
+        console.error("Error fetching latest tickets");
+      }
+    }
+
+    async function fetchActiveListings() {
+      const res = await fetch("http://localhost:3000/api/myTickets/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("token"),
+        },
+      });
+      const data = await res.json();
+      if (data.message != "Active listings fetched successfully") {
+        setListings(data.data); // Set the active listings
+      } else {
+        console.error("Error fetching active listings");
+      }
+    }
+
+    fetchDashboardStats();
+    fetchLatestTickets();
+    fetchActiveListings();
   }, []);
 
   return (
@@ -87,21 +122,21 @@ function TicketDashboard() {
 
       <section className="px-6 py-12 mx-auto my-0 max-w-screen-xl">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-white">Popular Events</h2>
-          <a href="/trade" className="px-4 py-1.5 text-sm text-white rounded-md border border-solid cursor-pointer bg-zinc-800 border-blue-50 border-opacity-10">
+          <h2 className="text-xl font-semibold text-white">Latest Tickets</h2>
+          <a href="/tickets" className="px-4 py-1.5 text-sm text-white rounded-md border border-solid cursor-pointer bg-zinc-800 border-blue-50 border-opacity-10">
             View All
           </a>
         </div>
         <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] max-sm:grid-cols-[1fr]">
-          {[1, 2, 3].map((i) => (
+          {latestTickets.map((ticket) => (
             <EventCard
-              key={i}
-              title={`Summer Music Festival ${i}`}
-              location="Central Park"
-              date={`Aug ${i + 15}`}
-              price={99}
-              ticketsLeft={120 - i * 10}
-              imageUrl="https://images.pexels.com/photos/31731254/pexels-photo-31731254.jpeg"
+              key={ticket.id}
+              title={ticket.title}
+              location={ticket.location}
+              date={ticket.date.split('T')[0]}
+              price={ticket.cost}
+              ticketsLeft={ticket.ticketsLeft}
+              imageUrl={ticket.image}
             />
           ))}
         </div>
@@ -112,13 +147,13 @@ function TicketDashboard() {
           Your Active Listings
         </h2>
         <div className="overflow-hidden bg-gray-900 rounded-md border border-solid border-neutral-700">
-          {[1, 2, 3, 4].map((i) => (
+          {listings.map((listing) => (
             <ListingItem
-              key={i}
-              title={`Event Title ${i}`}
-              section={`Section A, Row ${i}`}
-              price={199}
-              tickets={2}
+              key={listing.id}
+              title={listing.title}
+              section={listing.status}
+              price={listing.cost}
+              tickets={listing.numberOfTickets}
             />
           ))}
         </div>
