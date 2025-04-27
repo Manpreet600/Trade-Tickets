@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProfileHeader from "./ProfileHeader";
 import StatsOverview from "./StatsOverview";
 import TradingHistory from "./TradingHistory";
@@ -14,7 +14,37 @@ function UserProfile() {
     joinDate: "January 2024",
     ticketsSold: 45,
     ticketsBought: 32,
+    createdAt: "2024-01-01T00:00:00Z",
   });
+
+  useEffect(() => {
+    console.log(user);
+  }
+  , [user]);
+
+  useEffect(() => {
+    async function fetchUserData() {
+      try {
+        const response = await fetch("http://localhost:3000/api/profile/", {
+          method: "GET",
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setUser(data.data);
+        } else {
+          console.error("Error fetching user data:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+
+    fetchUserData();
+  }
+  , []);
 
   const [isEditing, setIsEditing] = useState(false);
 

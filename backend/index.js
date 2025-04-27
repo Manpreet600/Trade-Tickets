@@ -9,6 +9,7 @@ import { tradeRouter } from './pages/tradeTickets.js';
 import { myTicketsRouter } from './pages/mytickets.js';
 import dotenv from 'dotenv';
 import { settingsRouter } from './pages/settings.js';
+import { profileRouter } from './pages/profile.js';
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use('/api/dashboard', dashRouter);
 app.use('/api/tradeTickets', tradeRouter);
 app.use('/api/myTickets', myTicketsRouter);
 app.use('api/settings', settingsRouter);
+app.use('/api/profile', profileRouter)
 
 const main = async () => {
     await mongoose.connect(MONGO_URI)

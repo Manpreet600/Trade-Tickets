@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import StatCard from "./StatCard";
 
 function StatsOverview({ user }) {
+  useEffect(() => {
+    console.log(user.createdAt);
+  }
+  , [user]);
   const stats = [
     {
       title: "Total Tickets Sold",
-      value: user.ticketsSold,
+      value: user.sold,
     },
     {
       title: "Total Purchases",
-      value: user.ticketsBought,
+      value: user.bought,
     },
     {
       title: "Member Since",
-      value: user.joinDate,
+      value: user.createdAt.split('T')[0].replace(/-/g, "/"),
     },
   ];
 

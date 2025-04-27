@@ -32,9 +32,10 @@ const ticketsSchema = new Schema({
     type: String,
     description: String,
     date: { type: Date },
-    image: { type: String , default: "https://images.pexels.com/photos/18515130/pexels-photo-18515130.jpeg"},
+    image: { type: String , default: "https://www.shutterstock.com/shutterstock/photos/2556935065/display_1500/stock-vector-avatar-photo-default-user-icon-picture-face-social-2556935065.jpg"},
     status: { type: String, default: "pending" },
-    purchaserUsername: String
+    purchaserUsername: String,
+    createdAt: { type: Date, default: Date.now() },
 }, {
     timestamps: true
 })

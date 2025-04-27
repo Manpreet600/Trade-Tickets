@@ -1,5 +1,4 @@
 import { Router } from "express";
-import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { userModel, ticketsModel, eventModel } from "../db.js";
@@ -36,3 +35,5 @@ profileRouter.get("/", async (req, res) => {
     }
 }
 );
+
+export { profileRouter };
