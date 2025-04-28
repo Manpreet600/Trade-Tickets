@@ -27,6 +27,7 @@ function AuthForm({
           userName: formData.name,
           email: formData.email,
           password: formData.password,
+          number: formData.number,
         }),
       });
       const data = await res.json();
@@ -102,6 +103,18 @@ function AuthForm({
                 value={formData.lname}
                 required
                 onChange={(e) => onInputChange("name", e.target.value)}
+              />
+            </div>
+          )}
+          {isSignUp && (
+            <div className="mb-4">
+              <label className="block mb-2 text-sm text-zinc-400">Phone number (without country code)</label>
+              <input
+                className="px-3 py-2 w-full text-sm rounded-md border border-solid bg-white bg-opacity-10 border-white border-opacity-10 text-black"
+                type="text"
+                value={formData.number}
+                required
+                onChange={(e) => onInputChange("number", e.target.value)}
               />
             </div>
           )}

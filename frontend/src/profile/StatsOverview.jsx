@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import StatCard from "./StatCard";
 
 function StatsOverview({ user }) {
-  useEffect(() => {
-    console.log(user.createdAt);
-  }
-  , [user]);
+
   const stats = [
     {
       title: "Total Tickets Sold",

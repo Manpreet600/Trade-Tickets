@@ -18,11 +18,6 @@ function UserProfile() {
   });
 
   useEffect(() => {
-    console.log(user);
-  }
-  , [user]);
-
-  useEffect(() => {
     async function fetchUserData() {
       try {
         const response = await fetch("http://localhost:3000/api/profile/", {

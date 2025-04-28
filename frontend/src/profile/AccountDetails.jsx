@@ -1,7 +1,6 @@
 import React from "react";
 
 function AccountDetails({ user }) {
-  console.log(user.createdAt.slice(":")[0])
   return (
     <section className="p-6 bg-gray-800 rounded-xl">
       <h2 className="mb-4 text-xl font-medium">Account Details</h2>

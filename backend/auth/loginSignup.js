@@ -8,20 +8,21 @@ const authRouter = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 authRouter.post("/signup", async (req, res) => {
-  const { name,lastname , userName, email, password } = req.body;
+  const { name,lastname , userName, email, password, number } = req.body;
   try {
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-
+    console.log(number)
     await userModel.create({
         name,
         lastname,
         userName,
         email,
         password: hashedPassword,
+        number
       });
     const token = jwt.sign({ userName }, JWT_SECRET);
     res.json({

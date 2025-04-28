@@ -35,7 +35,6 @@ function SearchBar() {
       alert("Ticket created successfully");
       setShowForm(false);
     } else {
-      console.log(response.message)
       alert("Error creating ticket");
     }
     titleRef.current.value = "";

@@ -2,15 +2,8 @@
 import React from "react";
 
 function TicketCard({ id, title, date, location, price, imageUrl }) {
-  const handleEdit = () => {
-    console.log(`Editing ticket ${id}`);
-  };
 
-  const handleViewDetails = () => {
-    console.log(`Viewing details for ticket ${id}`);
-  };
   const ticketRemove = async () => {
-    console.log(id)
     const res = await fetch("http://localhost:3000/api/myTickets/deleteTicket", {
       method: "POST",
       headers: {

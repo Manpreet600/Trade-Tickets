@@ -27,7 +27,6 @@ function TicketDashboard() {
       if (data.message === "Dashboard data fetched successfully") {
         setActiveListings(data.data.totalTickets);
         setTotalSales(data.data.sold);
-        console.log(data.data.sales)
         setViews(data.data.views);
         setAvgPrice(data.data.avgPrice);
         setTotalSalesValue(data.data.sales);
@@ -95,7 +94,7 @@ function TicketDashboard() {
                   value={totalSales}
                   label="Total Sales"
                   colorTheme="green"
-                  prefix="₹"
+                  prefix=""
                 />
                 <StatCard
                   value={views}
@@ -111,7 +110,7 @@ function TicketDashboard() {
               </div>
               <div className="p-4 rounded-md border border-solid bg-[rgba(46,160,67,0.1)] border-green-600 border-opacity-10">
                 <div className="text-2xl font-semibold text-green-600">
-                  {totalSalesValue}
+                  ₹{totalSalesValue}
                 </div>
                 <div className="text-sm text-zinc-400">Total Sales</div>
               </div>
@@ -157,6 +156,9 @@ function TicketDashboard() {
             />
           ))}
         </div>
+          <div className="flex justify-center pt-[10px] text-[20px] text-white/50">
+            {listings.length === 0 ? "No active listing" : ""}
+          </div>
       </section>
     </main>
   );

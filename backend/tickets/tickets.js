@@ -23,7 +23,9 @@ ticketRouter.post("/createTicket", async (req, res) => {
     const decoded = jwt.verify(token, JWT_SECRET);
     const userName = decoded.userName;
     const data = await userModel.findOne({ userName })
+    console.log(data)
     const email = data.email;
+    const number = data.number;
     const randomString = rabndomString(10);
     if (!userName || !type || !description || !date ) {
         console.log(userName, type, description, date, image);
@@ -40,6 +42,7 @@ ticketRouter.post("/createTicket", async (req, res) => {
             description,
             date,
             image,
+            number,
             status: "pending",
             location: location
         });

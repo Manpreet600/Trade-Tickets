@@ -1,10 +1,7 @@
 import React, { use, useEffect } from "react";
 
 function ProfileHeader({ user, toggleEdit }) {
-  useEffect(() => {
-    console.log(user.image);
-  }
-  , [user]);
+
   return (
     <header className="flex gap-8 items-center mb-12 max-sm:flex-col max-sm:text-center">
       <img

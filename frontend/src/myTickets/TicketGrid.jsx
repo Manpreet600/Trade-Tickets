@@ -18,7 +18,6 @@ function TicketGrid() {
       const data = await res.json();
       if (data.message === "Tickets fetched successfully") {
         setTickets(data.data);
-        console.log(data.data);
       } else {
         console.error("Error fetching dashboard data");
       }
@@ -26,11 +25,6 @@ function TicketGrid() {
     main()
 
   },[])
-
-  useEffect(() => {
-    console.log(tickets);
-  }
-  , [tickets]);
 
   return (
     <section className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] max-sm:grid-cols-[1fr]">
